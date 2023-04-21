@@ -30,5 +30,8 @@ jobs:
     - name: Add Source
       run: dotnet nuget add source --username ValiantsinSerada --password ${{ secrets.AUTH_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/ValiantsinSerada/index.json"
       
+    - name: Set API Key
+      run: dotnet nuget setapikey ${{ secrets.AUTH_TOKEN }} -Source https://nuget.pkg.github.com/ValiantsinSerada/index.json
+      
     - name: Push
-      run: dotnet nuget push "/home/runner/work/eShop/eShopoutput/*.nupkg" -sk ${{ secrets.AUTH_TOKEN }} -s https://nuget.pkg.github.com/ValiantsinSerada/index.json
+      run: dotnet nuget push "/home/runner/work/eShop/eShopoutput/*.nupkg" -k ${{ secrets.AUTH_TOKEN }} -s https://nuget.pkg.github.com/ValiantsinSerada/index.json
