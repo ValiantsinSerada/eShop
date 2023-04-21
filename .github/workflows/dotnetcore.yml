@@ -22,7 +22,7 @@ jobs:
       run: dotnet test ./eShopOnWeb.sln --configuration Release
       
     - name: Pack
-      run: dotnet pack ./eShopOnWeb.sln --configuration Release --no-restore --no-build --output artifact/
+      run: dotnet pack ./src/PublicApi/PublicApi.csproj --configuration Release --no-restore --no-build --output artifact/
       
     - name: Push
       run: dotnet push artifact/** -k ${{ secrets.NUGET_AUTH_TOKEN }} -s https://nuget.pkg.github.com/ValiantsinSerada/index.json
