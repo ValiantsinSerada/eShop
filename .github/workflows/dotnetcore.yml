@@ -28,4 +28,4 @@ jobs:
       run: dotnet pack src/PublicApi/PublicApi.csproj --configuration Release --no-restore --no-build --include-symbols --output ${{ env.PACKAGE_OUPUT_DIRECTORY }}  
       
     - name: Push
-      run: dotnet nuget push ${{ env.PACKAGE_OUPUT_DIRECTORY }}\*.nupkg -k ${{ secrets.AUTH_TOKEN }} -s https://nuget.pkg.github.com/ValiantsinSerada/index.json
+      run: dotnet nuget push ${{ env.PACKAGE_OUPUT_DIRECTORY }}/*.nupkg -k ${{ secrets.AUTH_TOKEN }} -s https://nuget.pkg.github.com/ValiantsinSerada/index.json
