@@ -2,6 +2,9 @@ name: eShopOnWeb Build and Test
 
 on: [push, pull_request, workflow_dispatch]
 
+env:
+  PACKAGE_OUPUT_DIRECTORY: ${{ github.workspace }}\output
+
 jobs:
   build:
 
@@ -20,3 +23,9 @@ jobs:
     
     - name: Test with dotnet
       run: dotnet test ./eShopOnWeb.sln --configuration Release
+      
+    - name: Pack
+      run: dotnet pack src/PublicApi/PublicApi.csproj --configuration Release --no-restore --no-build --include-symbols --output ${{ env.PACKAGE_OUPUT_DIRECTORY }}
+      
+    - name: Push
+      run: dotnet nuget push ${{ env.PACKAGE_OUPUT_DIRECTORY }}\*.nupkg -k ${{ secrets.NUGET_AUTH_TOKEN }} -s https://nuget.pkg.github.com/ValiantsinSerada/index.json
